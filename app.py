@@ -1946,7 +1946,7 @@ class HubIntelligenceReglementaire:
             <h2>Quotidienne</h2>
             <p>Données marché mises à jour</p>
             </div>
-            ""', unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
@@ -1971,7 +1971,7 @@ class HubIntelligenceReglementaire:
         # Note méthodologique
         st.markdown("""
         <div class="methodology-box">
-        <h4>📝 Note Méthodologique</h4>
+        <h4>Note Méthodologique</h4>
         <p>Tous les scores sont calculés selon une méthodologie transparente et pondérée. 
         Les estimations expertes sont utilisées lorsque les données officielles ne sont pas encore disponibles, 
         clairement indiquées et mises à jour au fur et à mesure de l'émergence de nouvelles informations.</p>
