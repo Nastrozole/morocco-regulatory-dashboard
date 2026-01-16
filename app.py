@@ -820,7 +820,12 @@ class HubIntelligenceReglementaire:
             st.markdown('<h4>MATURITÉ MiCA</h4>', unsafe_allow_html=True)
             st.markdown(f'<h3>{self.score_maturite_mica:.1f}%</h3>', unsafe_allow_html=True)
             st.markdown('<p>Cadre pleinement opérationnel</p>', unsafe_allow_html=True)
-            st.markdown('<div class="progress-container"><div class="progress-bar" style="width: {self.score_maturite_mica}%"></div></div>'.format(self=self), unsafe_allow_html=True)
+            # Barre de progression personnalisée
+            st.markdown(f'''
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {self.score_maturite_mica}%"></div>
+            </div>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col2:
@@ -828,7 +833,11 @@ class HubIntelligenceReglementaire:
             st.markdown('<h4>MATURITÉ MAROC</h4>', unsafe_allow_html=True)
             st.markdown(f'<h3>{self.score_maturite_maroc:.1f}%</h3>', unsafe_allow_html=True)
             st.markdown(f'<p>+8% vs Q4 2024</p>', unsafe_allow_html=True)
-            st.markdown('<div class="progress-container"><div class="progress-bar" style="width: {self.score_maturite_maroc}%"></div></div>'.format(self=self), unsafe_allow_html=True)
+            st.markdown(f'''
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {self.score_maturite_maroc}%"></div>
+            </div>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col3:
@@ -836,7 +845,11 @@ class HubIntelligenceReglementaire:
             st.markdown('<h4>ALIGNEMENT MiCA</h4>', unsafe_allow_html=True)
             st.markdown(f'<h3>{self.score_alignement_maroc:.1f}%</h3>', unsafe_allow_html=True)
             st.markdown(f'<p>Écart: {self.score_alignement_mica - self.score_alignement_maroc:.0f}%</p>', unsafe_allow_html=True)
-            st.markdown('<div class="progress-container"><div class="progress-bar" style="width: {self.score_alignement_maroc}%"></div></div>'.format(self=self), unsafe_allow_html=True)
+            st.markdown(f'''
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {self.score_alignement_maroc}%"></div>
+            </div>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         with col4:
@@ -846,7 +859,14 @@ class HubIntelligenceReglementaire:
             couleur_risque = "#FFC107" if self.score_risque_maroc < 65 else "#DC3545"
             st.markdown(f'<h3 style="color: {couleur_risque};">{self.score_risque_maroc:.0f}/100</h3>', unsafe_allow_html=True)
             st.markdown(f'<p>Niveau: {niveau_risque}</p>', unsafe_allow_html=True)
-            st.progress(100 - self.score_risque_maroc, text=f"{100 - self.score_risque_maroc:.0f}% de stabilité")
+            # Barre de progression personnalisée pour la stabilité (inverse du risque)
+            pourcentage_stabilite = 100 - self.score_risque_maroc
+            st.markdown(f'''
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {pourcentage_stabilite}%"></div>
+            </div>
+            <p style="font-size: 0.9rem; margin-top: 5px;">{pourcentage_stabilite:.0f}% de stabilité</p>
+            ''', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
         
         st.markdown("---")
@@ -925,7 +945,14 @@ class HubIntelligenceReglementaire:
             # Qualité des données
             st.markdown("### ✅ Qualité des Données")
             
-            st.progress(self.etat_actuel['fiabilite_donnees'], text=f"{self.etat_actuel['fiabilite_donnees']*100:.0f}% Vérifiées")
+            # Barre de progression personnalisée pour la fiabilité
+            fiabilite_pourcentage = self.etat_actuel['fiabilite_donnees'] * 100
+            st.markdown(f'''
+            <div class="progress-container">
+                <div class="progress-bar" style="width: {fiabilite_pourcentage}%"></div>
+            </div>
+            <p style="text-align: center; font-size: 0.9rem; margin: 5px 0;">{fiabilite_pourcentage:.0f}% Vérifiées</p>
+            ''', unsafe_allow_html=True)
             
             col_qual1, col_qual2, col_qual3 = st.columns(3)
             with col_qual1:
@@ -1427,7 +1454,13 @@ class HubIntelligenceReglementaire:
             with col5:
                 if progression != "0%":
                     valeur_progression = int(progression.rstrip('%'))/100
-                    st.progress(valeur_progression, text=progression)
+                    # Barre de progression personnalisée
+                    st.markdown(f'''
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: {progression}"></div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.8rem;">{progression}</p>
+                    ''', unsafe_allow_html=True)
                 else:
                     st.markdown(progression)
     
@@ -1913,7 +1946,7 @@ class HubIntelligenceReglementaire:
             <h2>Quotidienne</h2>
             <p>Données marché mises à jour</p>
             </div>
-            """, unsafe_allow_html=True)
+            ""', unsafe_allow_html=True)
         
         with col3:
             st.markdown("""
